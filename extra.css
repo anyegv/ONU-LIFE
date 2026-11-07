@@ -1,0 +1,22 @@
+/* Medidores y consecuencias */
+.meters{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 16px;margin:10px 0 18px;padding:12px 14px;border:2px solid var(--ink);background:var(--paper)}
+.meter span{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.meter strong{font-family:var(--mono);font-size:13px}
+.bar{height:9px;margin:3px 0;border:1px solid var(--ink);background:rgba(29,27,23,.06)}
+.bar i{display:block;height:100%;background:var(--blue);transition:width .5s}
+.bar i.low{background:var(--veto)}
+.meter em{font-style:normal;font-weight:700;margin-left:6px}
+.meter em.up{color:var(--approve)}.meter em.down{color:var(--veto)}
+.history{margin:14px 0 0;padding-left:18px;font-size:14px}
+.history b.approve{color:var(--approve)}.history b.abstain{color:var(--abstain)}.history b.veto{color:var(--veto)}
+@media(max-width:640px){.meters{grid-template-columns:1fr}}
+
+.score-box{margin:10px 0 14px;padding:16px;border:3px double var(--ink);text-align:center}
+.score-box small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.score-box strong{font-family:var(--mono);font-size:64px;line-height:1}
+.score-box span{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.ladder{list-style:none;margin:0;padding:0;border:2px solid var(--ink)}
+.ladder li{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.ladder li:last-child{border-bottom:0}
+.ladder li.here{background:var(--ink);color:var(--paper);font-weight:700;font-size:15px}
+.rank-next{margin:8px 0 14px;font-family:var(--mono);font-size:12px;text-align:center}

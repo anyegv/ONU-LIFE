@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#efe6d2" />
+  <title>Veta o no veta | Simulación del Consejo de Seguridad</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="extra.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Inicio" onclick="goHome(); return false;">
+        <span class="brand-seal">ONU</span>
+        <span class="brand-name">Sala de decisiones<br><small>Simulación educativa</small></span>
+      </a>
+      <span class="top-note">Documento confidencial · Uso en aula</span>
+    </header>
+
+    <!-- INICIO -->
+    <section id="home" class="screen active">
+      <div class="cover">
+        <p class="file-label">Expediente del Consejo de Seguridad</p>
+        <h1>Veta<br>o no veta</h1>
+        <p class="lead">Eres el representante de un miembro permanente. Las crisis llegan a tu mesa. Cada voto tiene un coste: sube unos medidores y baja otros. Tus decisiones de hoy cambian las crisis de mañana. Si un medidor llega a 0, tu mandato termina.</p>
+        <div class="vote-legend">
+          <div><span class="chip chip-approve">APROBAR</span><p>Votas a favor del texto.</p></div>
+          <div><span class="chip chip-abstain">ABSTENERSE</span><p>No lo apoyas, pero tampoco lo bloqueas.</p></div>
+          <div><span class="chip chip-veto">VETAR</span><p>Un solo voto en contra lo detiene.</p></div>
+        </div>
+        <button class="btn btn-ink start-btn" onclick="startSimulation()">Abrir el primer expediente →</button>
+      </div>
+      <p class="intro-note">Para aprobar una resolución sustantiva se necesitan 9 votos favorables y ningún voto negativo de los 5 miembros permanentes. La abstención no bloquea el texto.</p>
+    </section>
+
+    <!-- SIMULACIÓN -->
+    <section id="simulation" class="screen">
+      <div class="section-head">
+        <h2>Mesa de decisiones</h2>
+        <button class="text-button" onclick="goHome()">← Inicio</button>
+      </div>
+
+      <p class="case-no" id="simProgress">Expediente 1</p>
+      <div id="meters" class="meters" aria-label="Medidores"></div>
+
+      <article id="simCard" class="paper sim-card">
+        <div class="stamp" id="stamp" aria-hidden="true"></div>
+        <p class="case-no" id="caseNo">EXPEDIENTE N.º 01</p>
+        <h2 id="crisisTitle" class="crisis-title"></h2>
+        <p id="crisisContext" class="body-copy"></p>
+
+        <div id="crisisPositions" class="positions" hidden>
+          <div class="position"><small>A favor del texto</small><p id="posFor"></p></div>
+          <div class="position"><small>En contra del texto</small><p id="posAgainst"></p></div>
+        </div>
+
+        <div class="resolution-box">
+          <small>Texto de la resolución</small>
+          <p id="crisisResolution"></p>
+        </div>
+
+        <div class="vote-actions" id="voteActions">
+          <p class="decisive">Tu voto es decisivo. ¿Qué harás?</p>
+          <button class="btn btn-approve" onclick="castVote('approve')">✓ APROBAR</button>
+          <button class="btn btn-abstain" onclick="castVote('abstain')">○ ABSTENERSE</button>
+          <button class="btn btn-veto" onclick="castVote('veto')">✕ VETAR</button>
+        </div>
+
+        <div id="simOutcome" aria-live="polite" hidden>
+                    <h3 id="outcomeTitle" class="outcome-title"></h3>
+          <p id="outcomeText" class="body-copy"></p>
+          <button id="simNext" class="btn btn-ink btn-full" onclick="nextCrisis()">Siguiente expediente →</button>
+        </div>
+      </article>
+      <p class="footnote">Aviso: las crisis, países y consecuencias de esta simulación son ficticias y se utilizan únicamente con fines educativos. No describen operaciones ni estimaciones reales.</p>
+    </section>
+
+    <!-- RESULTADO -->
+    <section id="simulationResult" class="screen">
+      <div class="section-head"><h2>Informe final</h2><button class="text-button" onclick="goHome()">← Inicio</button></div>
+      <article class="paper">
+        <p class="case-no">INFORME DE MANDATO</p>
+        <div class="score-box"><small>Tu puntuación</small><strong id="finalScore">0</strong><span>de 400</span></div>
+        <ul id="rankLadder" class="ladder"></ul>
+        <p id="rankNext" class="rank-next"></p>
+        <div class="result-hero">
+          <h2 id="simFinalTitle" class="crisis-title">Tu mandato ha terminado</h2>
+          <p id="simFinalText" class="body-copy"></p>
+        </div>
+        <div class="result-stats">
+          <div class="result-stat approve"><strong id="finalApproved">0</strong><span>Aprobadas</span></div>
+          <div class="result-stat abstain"><strong id="finalAbstained">0</strong><span>Abstenciones</span></div>
+          <div class="result-stat veto"><strong id="finalVetoed">0</strong><span>Vetos</span></div>
+        </div>
+        <div id="finalMeters" class="meters"></div>
+        <p id="finalSummary" class="body-copy"></p>
+        <ul id="finalHistory" class="history"></ul>
+        <div class="balance-note">
+          <small>Para reflexionar</small>
+          <p>En la realidad, los vetos no se justifican solo con razones humanitarias. Los miembros permanentes suelen invocar la soberanía estatal, objeciones a la redacción del texto, el temor a que una medida se use como precedente o intereses estratégicos. Quienes critican el veto sostienen que paraliza al Consejo en crisis graves; quienes lo defienden, que garantiza que las grandes potencias permanezcan dentro del sistema. Conocer ambas posturas es parte de entender cómo funciona el Consejo.</p>
+        </div>
+        <button class="btn btn-ink btn-full" onclick="startSimulation()">↻ Volver a jugar</button>
+        <button class="btn btn-outline btn-full" onclick="goHome()">Volver al inicio</button>
+      </article>
+    </section>
+
+    <footer class="footer">VETA O NO VETA · Recurso educativo no oficial · Escenarios ficticios</footer>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
